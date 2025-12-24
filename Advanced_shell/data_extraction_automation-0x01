@@ -4,14 +4,14 @@ INPUT_FILE="data.json"
 # Extract the required fields using jq, awk and sed
 name=$(jq -r '.name' "$INPUT_FILE")
 type=$(jq -r '.types[0].type.name' "$INPUT_FILE")
-weight=$(jq -r '.weight' "$INPUT_FILE" | awk '{print $1/10}')
-height=$(jq -r '.height' "$INPUT_FILE" | awk '{print $1/10}')
+formatted_weight=$(jq -r '.weight' "$INPUT_FILE" | awk '{print $1/10}')
+formatted_height=$(jq -r '.height' "$INPUT_FILE" | awk '{print $1/10}')
 
 # Use sed to capitalize the name and the type
 name=$(echo "$name" | sed 's/.*/\L&/; s/[a-z]*/\u&/')
 type=$(echo "$type" | sed 's/.*/\L&/; s/[a-z]*/\u&/')
 
 # Format and display the output
-echo ["Name: $name, Type: $type, Weight: ${weight}kg, Height: ${height}m tall."]
+echo ["Name: $name, Type: $type, Weight: ${formatted_weight}kg, Height: ${formatted_height}m tall."]
 # Save the formatted output to a file  
-echo "Name: $name, Type: $type, Weight: ${weight}kg, Height: ${height}m tall." > formatted_data.txt
+echo "Name: $name, Type: $type, Weight: ${formatted_weight}kg, Height: ${formatted_height}m tall." > formatted_data.txt
