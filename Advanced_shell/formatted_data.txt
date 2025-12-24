@@ -1,0 +1,1 @@
+Name: pikachu, Type: electric, Weight: 6kg, Height: 0.4m
