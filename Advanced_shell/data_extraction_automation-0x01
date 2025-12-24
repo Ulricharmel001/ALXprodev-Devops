@@ -12,5 +12,6 @@ name=$(echo "$name" | sed 's/.*/\L&/; s/[a-z]*/\u&/')
 type=$(echo "$type" | sed 's/.*/\L&/; s/[a-z]*/\u&/')
 
 # Format and display the output
-echo "Name: $name" Type: $type Weight: ${weight}kg Height: ${height}m   
-echo "Name: $name, Type: $type, Weight: ${weight}kg, Height: ${height}m" > formatted_data.txt
+echo ["Name: $name, Type: $type, Weight: ${weight}kg, Height: ${height}m tall."]
+# Save the formatted output to a file  
+echo "Name: $name, Type: $type, Weight: ${weight}kg, Height: ${height}m tall." > formatted_data.txt
