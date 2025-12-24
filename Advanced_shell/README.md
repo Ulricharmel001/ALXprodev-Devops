@@ -20,3 +20,11 @@ Create a script that loops through a list of Pokémon [Bulbasaur, Ivysaur, Venus
 For each Pokémon, retrieve its data from the API and save it to a separate file named after the Pokémon (e.g., pikachu.json, bulbasaur.json…).  
 
 Handle any potential rate-limiting issues by adding a delay between requests.
+
+
+## Summary calculation
+
+This script processes multiple JSON files containing Pokémon data,
+extracts the name, height, and weight of each Pokémon,
+and summarizes the information in a CSV file.
+Define the output CSV file
