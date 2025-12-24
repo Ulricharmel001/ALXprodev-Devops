@@ -28,3 +28,11 @@ This script processes multiple JSON files containing Pokémon data,
 extracts the name, height, and weight of each Pokémon,
 and summarizes the information in a CSV file.
 Define the output CSV file
+
+## Second Batch Processing 
+
+This script fetches JSON data for a list of Pokémon from the PokeAPI
+and saves each Pokémon's data into a separate JSON file named after the Pokémon.
+It runs the fetch operations in parallel to speed up the process.
+
+
