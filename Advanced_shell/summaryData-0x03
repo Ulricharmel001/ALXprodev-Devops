@@ -19,14 +19,14 @@ for file in *.json; do
     total_weight=$((total_weight + weight))
     count=$((count + 1))
 done
-# Calculate average height and weight  using awk
-if [ $count -gt 0 ]; then
-    avg_height=$(awk "BEGIN {print $total_height / $count}")
-    avg_weight=$(awk "BEGIN {print $total_weight / $count}")
+# Calculate average height and weight  using awk and  sed
+if [ "$count" -gt 0 ]; then
+    avg_height=$(awk "BEGIN {print $total_height / $count}" | sed 's/^\./0./')
+    avg_weight=$(awk "BEGIN {print $total_weight / $count}" | sed 's/^\./0./')
+
     # Print the averages
     echo "Average Height: $avg_height"
     echo "Average Weight: $avg_weight"  
-
 else
     echo "No Pokémon data found."
-fi  
+fi
