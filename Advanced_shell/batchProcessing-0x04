@@ -1,11 +1,36 @@
 #!/bin/bash
-# List of Pokémon to fetch      
-pokemon_list=("Bulbasaur" "Ivysaur" "Venusaur" "Charmander" "Charmeleon")
-for pokemon in "${pokemon_list[@]}"; do
-    (
-        curl -s "https://pokeapi.co/api/v2/pokemon/${pokemon,,}" -o "${pokemon}.json"
-    ) &
-done
-wait
-echo "All Pokémon data fetched."
 
+# List of Pokémon to fetch
+POKEMONS=("Bulbasaur" "Ivysaur" "Venusaur" "Charmander" "Charmeleon")
+LOG_FILE="fetch_log.txt"
+ERROR_FILE="errors.txt"
+# Standard prefix for PokeAPI
+URL_PREFIX="https://pokeapi.co/api/v2/pokemon/"
+
+# Clear files at the start
+> "$LOG_FILE"
+> "$ERROR_FILE"
+
+echo "Starting parallel fetch for ${#POKEMONS[@]} Pokémon..."
+
+for POKEMON in "${POKEMONS[@]}"; do
+    (
+        # Convert name to lowercase
+        LOWER_NAME=$(echo "$POKEMON" | tr '[:upper:]' '[:lower:]')
+
+        API_URL="${URL_PREFIX}${LOWER_NAME}/"
+        OUTPUT_FILE="${LOWER_NAME}.json"
+        http_code=$(curl -sL -o "$OUTPUT_FILE" -w "%{http_code}" "$API_URL")
+
+        if [ "$http_code" -eq 200 ]; then
+            echo "Fetched $POKEMON" >> "$LOG_FILE"
+            echo "Done: $POKEMON"
+        else
+            echo "Failed: $POKEMON (HTTP $http_code)" >> "$ERROR_FILE"
+            rm -f "$OUTPUT_FILE"
+        fi
+    ) & 
+done
+
+wait
+echo "All processes complete. Check $LOG_FILE for results."
