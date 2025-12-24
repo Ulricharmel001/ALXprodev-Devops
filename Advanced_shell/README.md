@@ -10,7 +10,7 @@ Added a script that Extract information from the json file
 created from the previous exercise, it extract specific field 
 using `awk, sed, echo and jq` 
 
-## Auto extract multiple data 
+## Auto extract multiple data , Batch processing 
 
 Objective: Automate the retrieval of data for multiple Pokémon and store it in separate files.
 
